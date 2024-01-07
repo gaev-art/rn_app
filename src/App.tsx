@@ -7,12 +7,14 @@ import {usePrimaryColor} from './hooks';
 import {PageOne, PageTwo} from './screens';
 
 import 'react-native-gesture-handler';
+import {MainPage} from './screens/MainPage.tsx';
 
 export type RootStackParamList = {
   PageOne: undefined;
   PageTwo: undefined;
   Profile: undefined;
   Settings: undefined;
+  MainPage: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -26,7 +28,14 @@ export const App = () => {
     <>
       <StatusBar barStyle={barStyle} backgroundColor={primaryBackgroundColor} />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName={'PageOne'}>
+        <Stack.Navigator initialRouteName={'MainPage'}>
+          <Stack.Screen
+            name="MainPage"
+            component={MainPage}
+            options={{
+              headerShown: false,
+            }}
+          />
           <Stack.Screen
             name="PageOne"
             component={PageOne}
