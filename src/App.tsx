@@ -1,17 +1,16 @@
 import React from 'react';
-import {StatusBar, useColorScheme} from 'react-native';
+import {StatusBar} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 
 import {usePrimaryColor} from './hooks';
-import {PageOne, PageTwo} from './screens';
 
 import 'react-native-gesture-handler';
-import {MainPage} from './screens/MainPage.tsx';
+import {MainPage} from './screens';
 
 export type RootStackParamList = {
-  PageOne: undefined;
-  PageTwo: undefined;
+  BottomTabPage: undefined;
+  AccordionsPage: undefined;
   Profile: undefined;
   Settings: undefined;
   MainPage: undefined;
@@ -20,9 +19,7 @@ export type RootStackParamList = {
 const Stack = createStackNavigator<RootStackParamList>();
 
 export const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-  const {primaryTextColor, primaryBackgroundColor, barStyle} =
-    usePrimaryColor(isDarkMode);
+  const {primaryBackgroundColor, barStyle} = usePrimaryColor();
 
   return (
     <>
@@ -34,24 +31,11 @@ export const App = () => {
             component={MainPage}
             options={{
               headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="PageOne"
-            component={PageOne}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="PageTwo"
-            component={PageTwo}
-            options={{
-              title: '',
-              headerStyle: {
-                backgroundColor: primaryBackgroundColor,
-              },
-              headerTintColor: primaryTextColor,
+              // title: '',
+              // headerStyle: {
+              //   backgroundColor: primaryBackgroundColor,
+              // },
+              // headerTintColor: primaryTextColor,
             }}
           />
         </Stack.Navigator>

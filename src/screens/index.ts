@@ -1,6 +1,7 @@
-import {PageOne} from './PageOne.tsx';
-import {PageTwo} from './PageTwo.tsx';
+import {BottomTabPage} from './BottomTabPage.tsx';
+import {AccordionsPage} from './AccordionsPage.tsx';
 import {Profile} from './Profile.tsx';
 import {Settings} from './Settings.tsx';
+import {MainPage} from './MainPage.tsx';
 
-export {PageOne, PageTwo, Profile, Settings};
+export {BottomTabPage, AccordionsPage, Profile, Settings, MainPage};

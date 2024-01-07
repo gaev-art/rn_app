@@ -1,11 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, useColorScheme, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {usePrimaryColor} from '../hooks';
 
 export const Settings = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-  const {primaryTextColor, primaryBackgroundColor} =
-    usePrimaryColor(isDarkMode);
+  const {primaryTextColor, primaryBackgroundColor} = usePrimaryColor();
 
   return (
     <View style={[styles.main, {backgroundColor: primaryBackgroundColor}]}>

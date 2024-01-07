@@ -4,32 +4,29 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
-import {
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 
 import {usePrimaryColor} from '../hooks';
 import {RootStackParamList} from '../App.tsx';
-import {PageOne, PageTwo} from './index.ts';
+import {AccordionsPage, BottomTabPage} from './index.ts';
 import {Colors} from '../constants';
 
 const Drawer = createDrawerNavigator<RootStackParamList>();
 
-export const drawerData = [
-  {name: 'PageTwo', component: PageTwo, label: 'Page Two'},
+export const drawerData: {
+  component: () => React.JSX.Element;
+  name: keyof RootStackParamList;
+  label: string;
+}[] = [
+  {name: 'BottomTabPage', component: BottomTabPage, label: 'BottomTabPage'},
+  {name: 'AccordionsPage', component: AccordionsPage, label: 'AccordionsPage'},
 ];
 
 export const MainPage = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-  const {primaryTextColor, primaryBackgroundColor} =
-    usePrimaryColor(isDarkMode);
+  const {primaryTextColor, primaryBackgroundColor} = usePrimaryColor();
   return (
     <Drawer.Navigator
-      initialRouteName={'PageOne'}
+      initialRouteName={'BottomTabPage'}
       drawerContent={props => {
         return (
           <View style={styles.container}>
@@ -65,26 +62,16 @@ export const MainPage = () => {
         },
         headerTintColor: primaryTextColor,
       }}>
-      <Drawer.Screen
-        name={'PageOne'}
-        component={PageOne}
-        options={{
-          drawerLabel: 'one',
-          // headerTitle: () => (
-          //   <Logo width={150} height={1} style={styles.logo} />
-          // ),
-        }}
-      />
-      <Drawer.Screen
-        name={'PageTwo'}
-        component={PageTwo}
-        options={{
-          drawerLabel: 'two',
-          // headerTitle: () => (
-          //   <Logo width={150} height={1} style={styles.logo} />
-          // ),
-        }}
-      />
+      {drawerData.map(drawerItem => (
+        <Drawer.Screen
+          key={drawerItem.name}
+          name={drawerItem.name}
+          component={drawerItem.component}
+          options={{
+            drawerLabel: drawerItem.label,
+          }}
+        />
+      ))}
     </Drawer.Navigator>
   );
 };
