@@ -2,19 +2,19 @@ import React from 'react';
 import {Button, StyleSheet, useColorScheme, View} from 'react-native';
 import {NativeStackScreenProps} from 'react-native-screens/native-stack';
 import {RootStackParamList} from '../App.tsx';
-import {useCustomStatusBarStyle} from '../hooks';
+import {usePrimaryColor} from '../hooks';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'PageTwo'>;
 
 export const PageTwo = ({navigation}: Props) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {primeTextColor, primeBackgroundColor} =
-    useCustomStatusBarStyle(isDarkMode);
+  const {primaryTextColor, primaryBackgroundColor} =
+    usePrimaryColor(isDarkMode);
 
   return (
-    <View style={[styles.main, {backgroundColor: primeBackgroundColor}]}>
+    <View style={[styles.main, {backgroundColor: primaryBackgroundColor}]}>
       <Button
-        color={primeTextColor}
+        color={primaryTextColor}
         title={'Page one'}
         onPress={() => {
           navigation.navigate('PageOne');

@@ -1,15 +1,15 @@
 import React from 'react';
 import {StyleSheet, Text, useColorScheme, View} from 'react-native';
-import {useCustomStatusBarStyle} from '../hooks';
+import {usePrimaryColor} from '../hooks';
 
 export const Settings = () => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {primeTextColor, primeBackgroundColor} =
-    useCustomStatusBarStyle(isDarkMode);
+  const {primaryTextColor, primaryBackgroundColor} =
+    usePrimaryColor(isDarkMode);
 
   return (
-    <View style={[styles.main, {backgroundColor: primeBackgroundColor}]}>
-      <Text style={{color: primeTextColor}}>Settings</Text>
+    <View style={[styles.main, {backgroundColor: primaryBackgroundColor}]}>
+      <Text style={{color: primaryTextColor}}>Settings</Text>
     </View>
   );
 };

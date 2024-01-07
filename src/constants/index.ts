@@ -1,4 +1,7 @@
 import {Colors as colors} from 'react-native/Libraries/NewAppScreen';
+import {Dimensions} from 'react-native';
+
+export const {width, height} = Dimensions.get('window');
 
 export const Colors = {
   white: colors.white,
@@ -7,4 +10,5 @@ export const Colors = {
   light: colors.light,
   lighter: colors.lighter,
   darker: colors.darker,
+  primary: colors.primary,
 };

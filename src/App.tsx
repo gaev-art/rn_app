@@ -3,7 +3,7 @@ import {StatusBar, useColorScheme} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 
-import {useCustomStatusBarStyle} from './hooks';
+import {usePrimaryColor} from './hooks';
 import {PageOne, PageTwo} from './screens';
 
 import 'react-native-gesture-handler';
@@ -19,12 +19,12 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 export const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {primeBackgroundColor, primeTextColor, barStyle} =
-    useCustomStatusBarStyle(isDarkMode);
+  const {primaryTextColor, primaryBackgroundColor, barStyle} =
+    usePrimaryColor(isDarkMode);
 
   return (
     <>
-      <StatusBar barStyle={barStyle} backgroundColor={primeBackgroundColor} />
+      <StatusBar barStyle={barStyle} backgroundColor={primaryBackgroundColor} />
       <NavigationContainer>
         <Stack.Navigator initialRouteName={'PageOne'}>
           <Stack.Screen
@@ -38,12 +38,11 @@ export const App = () => {
             name="PageTwo"
             component={PageTwo}
             options={{
-              // headerShown: false,
               title: '',
               headerStyle: {
-                backgroundColor: primeBackgroundColor,
+                backgroundColor: primaryBackgroundColor,
               },
-              headerTintColor: primeTextColor,
+              headerTintColor: primaryTextColor,
             }}
           />
         </Stack.Navigator>

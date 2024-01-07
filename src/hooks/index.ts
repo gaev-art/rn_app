@@ -1,3 +1,3 @@
-import {useCustomStatusBarStyle} from './usePrimeColor.ts';
+import {usePrimaryColor} from './usePrimaryColor.ts';
 
-export {useCustomStatusBarStyle};
+export {usePrimaryColor};
