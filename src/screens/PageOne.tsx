@@ -1,29 +1,44 @@
 import React from 'react';
-import {Button, StyleSheet, useColorScheme, View} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Profile} from './Profile.tsx';
+import {Settings} from './Settings.tsx';
 import {RootStackParamList} from '../App.tsx';
+import {Button, useColorScheme} from 'react-native';
 import {NativeStackScreenProps} from 'react-native-screens/native-stack';
 import {useCustomStatusBarStyle} from '../hooks';
 
+const Tab = createBottomTabNavigator<RootStackParamList>();
 type Props = NativeStackScreenProps<RootStackParamList, 'PageOne'>;
 
 export const PageOne = ({navigation}: Props) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {primeTextColor, primeBackgroundColor} =
     useCustomStatusBarStyle(isDarkMode);
-
   return (
-    <View style={[styles.main, {backgroundColor: primeBackgroundColor}]}>
-      <Button
-        color={primeTextColor}
-        title={'Page two'}
-        onPress={() => {
-          navigation.navigate('PageTwo');
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerTitle: '',
+          headerLeft: () => (
+            <Button
+              onPress={() => navigation.navigate('PageTwo')}
+              title="PageTwo"
+              color={primeTextColor}
+            />
+          ),
+          headerStyle: {
+            backgroundColor: primeBackgroundColor,
+          },
+          headerTintColor: primeTextColor,
         }}
       />
-    </View>
+      <Tab.Screen
+        name="Settings"
+        component={Settings}
+        options={{headerShown: false}}
+      />
+    </Tab.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  main: {flex: 1, justifyContent: 'center', alignItems: 'center'},
-});

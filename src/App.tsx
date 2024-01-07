@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, StatusBar, useColorScheme} from 'react-native';
+import {StatusBar, useColorScheme} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 
@@ -11,6 +11,8 @@ import 'react-native-gesture-handler';
 export type RootStackParamList = {
   PageOne: undefined;
   PageTwo: undefined;
+  Profile: undefined;
+  Settings: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -29,24 +31,19 @@ export const App = () => {
             name="PageOne"
             component={PageOne}
             options={{
-              headerStyle: {
-                backgroundColor: primeBackgroundColor,
-              },
-              headerTintColor: primeTextColor,
-              headerRight: () => (
-                <Button
-                  onPress={() => alert('This is a button!')}
-                  title="Info"
-                  color={primeTextColor}
-                />
-              ),
+              headerShown: false,
             }}
           />
           <Stack.Screen
             name="PageTwo"
             component={PageTwo}
             options={{
-              headerShown: false,
+              // headerShown: false,
+              title: '',
+              headerStyle: {
+                backgroundColor: primeBackgroundColor,
+              },
+              headerTintColor: primeTextColor,
             }}
           />
         </Stack.Navigator>
