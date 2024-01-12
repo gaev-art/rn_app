@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {usePrimaryColor} from '../hooks';
+import {BASE_URL} from '@env';
 
 export const Profile = () => {
   const {primaryTextColor, primaryBackgroundColor} = usePrimaryColor();
-
+  console.log(BASE_URL);
   return (
     <View style={[styles.main, {backgroundColor: primaryBackgroundColor}]}>
       <Text style={{color: primaryTextColor}}>Profile</Text>
