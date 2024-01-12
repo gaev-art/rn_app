@@ -3,12 +3,13 @@ import {
   createDrawerNavigator,
   DrawerContentScrollView,
   DrawerItemList,
+  DrawerNavigationOptions,
 } from '@react-navigation/drawer';
 import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 
 import {usePrimaryColor} from '../hooks';
 import {RootStackParamList} from '../App.tsx';
-import {AccordionsPage, BottomTabPage} from './index.ts';
+import {AccordionsPage, BottomTabPage, RickAndMortyScreen} from './index.ts';
 import {Colors} from '../constants';
 
 const Drawer = createDrawerNavigator<RootStackParamList>();
@@ -17,36 +18,42 @@ export const drawerData: {
   component: () => React.JSX.Element;
   name: keyof RootStackParamList;
   label: string;
+  options?: DrawerNavigationOptions;
 }[] = [
   {name: 'BottomTabPage', component: BottomTabPage, label: 'BottomTabPage'},
   {name: 'AccordionsPage', component: AccordionsPage, label: 'AccordionsPage'},
+  {
+    name: 'RickAndMorty',
+    component: RickAndMortyScreen,
+    label: 'RickAndMorty',
+    options: {headerTitle: ''},
+  },
 ];
 
 export const MainPage = () => {
   const {primaryTextColor, primaryBackgroundColor} = usePrimaryColor();
+
   return (
     <Drawer.Navigator
       initialRouteName={'BottomTabPage'}
-      drawerContent={props => {
-        return (
-          <View style={styles.container}>
-            <DrawerContentScrollView {...props}>
-              <View style={styles.drawerContent}>
-                <View style={styles.drawerSection}>
-                  <DrawerItemList {...props} />
-                </View>
+      drawerContent={props => (
+        <View style={styles.container}>
+          <DrawerContentScrollView {...props}>
+            <View style={styles.drawerContent}>
+              <View style={styles.drawerSection}>
+                <DrawerItemList {...props} />
               </View>
-            </DrawerContentScrollView>
-            <View style={styles.bottomDrawerSection}>
-              <TouchableWithoutFeedback onPress={() => console.log('onPress')}>
-                <Text style={[styles.signOutBtn, {color: primaryTextColor}]}>
-                  Sign Out
-                </Text>
-              </TouchableWithoutFeedback>
             </View>
+          </DrawerContentScrollView>
+          <View style={styles.bottomDrawerSection}>
+            <TouchableWithoutFeedback onPress={() => console.log('onPress')}>
+              <Text style={[styles.signOutBtn, {color: primaryTextColor}]}>
+                Sign Out
+              </Text>
+            </TouchableWithoutFeedback>
           </View>
-        );
-      }}
+        </View>
+      )}
       screenOptions={{
         drawerActiveBackgroundColor: primaryBackgroundColor,
         drawerActiveTintColor: Colors.primary,
@@ -68,6 +75,7 @@ export const MainPage = () => {
           name={drawerItem.name}
           component={drawerItem.component}
           options={{
+            ...drawerItem.options,
             drawerLabel: drawerItem.label,
           }}
         />

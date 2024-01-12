@@ -14,6 +14,7 @@ export type RootStackParamList = {
   Profile: undefined;
   Settings: undefined;
   MainPage: undefined;
+  RickAndMorty: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
