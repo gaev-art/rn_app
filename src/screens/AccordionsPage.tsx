@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {usePrimaryColor} from '../hooks';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import Accordion from '../components/Accordion.tsx';
 
 export type AccordionType = {
@@ -40,17 +39,16 @@ export const AccordionsPage = () => {
   ]);
 
   return (
-    <SafeAreaView
-      style={[styles.main, {backgroundColor: primaryBackgroundColor}]}>
+    <View style={[styles.main, {backgroundColor: primaryBackgroundColor}]}>
       <ScrollView showsVerticalScrollIndicator={false}>
         {accordions.map((task, index) => {
           return <Accordion task={task} key={index} />;
         })}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  main: {flex: 1},
+  main: {flex: 1, paddingVertical: 20},
 });

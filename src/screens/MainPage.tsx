@@ -24,9 +24,8 @@ export const drawerData: {
   {name: 'AccordionsPage', component: AccordionsPage, label: 'AccordionsPage'},
   {
     name: 'RickAndMorty',
-    component: RickAndMortyScreen,
+    component: RickAndMortyScreen as () => React.JSX.Element,
     label: 'RickAndMorty',
-    options: {headerTitle: ''},
   },
 ];
 
@@ -76,7 +75,7 @@ export const MainPage = () => {
           component={drawerItem.component}
           options={{
             ...drawerItem.options,
-            drawerLabel: drawerItem.label,
+            // drawerLabel: drawerItem.label,
           }}
         />
       ))}

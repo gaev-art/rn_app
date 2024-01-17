@@ -7,8 +7,8 @@ export const usePrimaryColor = () => {
 
   const {primaryBackgroundColor, primaryTextColor, barStyle} = useMemo(
     () => ({
-      primaryBackgroundColor: isDarkMode ? Colors.dark : Colors.light,
-      primaryTextColor: isDarkMode ? Colors.light : Colors.dark,
+      primaryBackgroundColor: isDarkMode ? Colors.black : Colors.light,
+      primaryTextColor: isDarkMode ? Colors.white : Colors.black,
       barStyle: (isDarkMode
         ? 'light-content'
         : 'dark-content') as StatusBarStyle,
