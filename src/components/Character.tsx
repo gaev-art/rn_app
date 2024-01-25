@@ -1,17 +1,23 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {CharacterType} from '../types/episodesType.ts';
+import {CharacterType} from '../types/characterType.ts';
 import {usePrimaryColor} from '../hooks';
+import {RootStackParamList} from '../App.tsx';
+import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
 
 type Props = {
   character: CharacterType;
+  navigation: NativeStackNavigationProp<RootStackParamList>;
 };
 
-export const Character = ({character}: Props) => {
+export const Character = ({character, navigation}: Props) => {
   const {primaryTextColor} = usePrimaryColor();
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('CharacterDetails', {characterId: character.id})
+        }>
         <Image
           source={{uri: character.image}}
           height={200}

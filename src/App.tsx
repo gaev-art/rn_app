@@ -7,6 +7,7 @@ import {usePrimaryColor} from './hooks';
 
 import 'react-native-gesture-handler';
 import {MainPage} from './screens';
+import {CharacterDetails} from './screens/RickAndMorty/CharacterDetails.tsx';
 
 export type RootStackParamList = {
   BottomTabPage: undefined;
@@ -15,6 +16,7 @@ export type RootStackParamList = {
   Settings: undefined;
   MainPage: undefined;
   RickAndMorty: undefined;
+  CharacterDetails: {characterId: number};
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -37,6 +39,17 @@ export const App = () => {
               //   backgroundColor: primaryBackgroundColor,
               // },
               // headerTintColor: primaryTextColor,
+            }}
+          />
+          <Stack.Screen
+            name="CharacterDetails"
+            component={CharacterDetails}
+            options={{
+              // headerShown: false,
+              title: '',
+              headerStyle: {
+                backgroundColor: primaryBackgroundColor,
+              },
             }}
           />
         </Stack.Navigator>
