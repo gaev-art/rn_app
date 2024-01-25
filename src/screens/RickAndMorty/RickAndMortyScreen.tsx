@@ -9,11 +9,17 @@ import {
 } from 'react-native';
 import {usePrimaryColor} from '../../hooks';
 import {charactersService} from '../../services/charactersService.ts';
-import {CharacterType} from '../../types/episodesType.ts';
+import {CharacterType} from '../../types/characterType.ts';
 import {Character} from '../../components/Character.tsx';
 import {SearchIcon} from '../../constants/icons.ts';
+import {RootStackParamList} from '../../App.tsx';
+import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
 
-export const RickAndMortyScreen = () => {
+type Props = {
+  navigation: NativeStackNavigationProp<RootStackParamList>;
+};
+
+export const RickAndMortyScreen = ({navigation}: Props) => {
   const {primaryBackgroundColor, primaryTextColor} = usePrimaryColor();
   const [characters, setCharacters] = useState<CharacterType[]>([]);
   const [name, setName] = useState('');
@@ -62,7 +68,9 @@ export const RickAndMortyScreen = () => {
         <FlatList
           data={characters}
           scrollEnabled={false}
-          renderItem={({item}) => <Character character={item} />}
+          renderItem={({item}) => (
+            <Character character={item} navigation={navigation} />
+          )}
           keyExtractor={item => `${item.name}_${item.id}`}
         />
       </ScrollView>
